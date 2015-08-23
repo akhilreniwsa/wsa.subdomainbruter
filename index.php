@@ -3,10 +3,13 @@
 <title>
 WeSecureApp Subdomain Scanner V 0 .2
 </title>
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/jquery-1.9.1.js">
+    </script>
+    <link rel='stylesheet prefetch' href='//codepen.io/assets/reset/normalize.css'>
+    <link rel='stylesheet' href='style.css'>
 </head>
 <body>
-    <h1> WSA SUBDOMAINBRUTER V0.2</h1> <br/>
+<center>    <h1> WSA SUBDOMAINBRUTER V0.2</h1> <br/></center>
     <h3><br/></h3>
     <h2>Features</h2><br/>
     <li>Multi threading- for fast results</li>
@@ -17,10 +20,19 @@ WeSecureApp Subdomain Scanner V 0 .2
         
         <input name="target" placeholder="example.com" value="">
     </form>
-    <input type="checkbox" id="checkbox" name="debug" value="Debug"> Enable/Disable for Debug Info<br>
-    Requests per minute/current domain check:<br/><div id="requests"></div><br/>
+   <div id="debug"> <input type="checkbox" id="checkbox" name="debug" value="Debug"> Enable/Disable for Debug Info<br></div>
+    <div id="console">
+  
+
+<center>
+  <pre>Debug Info:<br/>
+Requests per minute/current domain check:
+  </pre></center>
+
+</div>
+    <br/>
     <div id="message"></div><br/>
-    Valid Domains:<br/><div id="response"></div><br/>
+  <b> Valid Domains:<br/></b><ul><div id="response"></div> <br/></ul>
     
 <?php
 //
@@ -54,7 +66,7 @@ WeSecureApp Subdomain Scanner V 0 .2
             async: false,
             success: function (data){
                 
-                $("#response").html(data);
+                $("#response").html('<li>'+data);
             }
         });
     
@@ -71,7 +83,7 @@ WeSecureApp Subdomain Scanner V 0 .2
             async: false,
             success: function (data){
                 
-                $("#requests").html(data);
+                $("#console").html('<center><pre>Debug Info:<br/><br/>Requests per minute/current domain check:<br/><br/>'+data+'</center></pre>');
             }
         });
     
@@ -79,7 +91,7 @@ WeSecureApp Subdomain Scanner V 0 .2
   }
             if($("#checkbox").prop('checked') == false)
             {
-                $("#requests").html("debug off");
+                $("#console").html('<center><pre>debug off</center></pre>');
             }
                                     
                                         
