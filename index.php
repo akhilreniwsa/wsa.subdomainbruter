@@ -1,13 +1,13 @@
 <html>
 <head>
 <title>
-WeSecureApp Subdomain Scanner V 0 .1 Beta
+WeSecureApp Subdomain Scanner V 0 .1 
 </title>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 <body>
-    <h1> This is an early version of subdomain brute forcer made in PHP</h1> <br/>
-    <h3>V 0.1 Beta<br/></h3>
+    <h1> WSA SUBDOMAINBRUTER V0.1</h1> <br/>
+    <h3><br/></h3>
     <h2>Features</h2><br/>
     <li>Multi threading- for fast results</li>
     <li>Input your own subdomain posibilities</li>
