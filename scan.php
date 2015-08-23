@@ -45,7 +45,7 @@ while($i<$count)
     else
     {
      $file = file_get_contents("valid.txt");
-     $file .= $sub[$i] . "<br/>";
+     $file .= $sub[$i] . "</li><li>";
      file_put_contents("valid.txt", $file);
      
     }
@@ -55,7 +55,7 @@ while($i<$count)
     else
     {
      $file = file_get_contents("valid.txt");
-     $file .= $sub[$i+1] . "<br/>";
+     $file .= $sub[$i+1] . "</li><li>";
      file_put_contents("valid.txt", $file);
     }
     if($sub3[$i]->code==0)
@@ -64,7 +64,7 @@ while($i<$count)
     else
     {
      $file = file_get_contents("valid.txt");
-     $file .= $sub[$i+2] . "<br/>";
+     $file .= $sub[$i+2] . "</li><li>";
      file_put_contents("valid.txt", $file);
     }
    
@@ -74,12 +74,11 @@ while($i<$count)
 $time= time()-$currenttime;
     
     $currentdom = $sub[$i];
-     $currentdom =$currentdom . "<br>" . $updateresult ."per/minute";
+     $currentdom =$currentdom . "<br><br>" . $updateresult ." per/minute";
     file_put_contents("debug.txt", $currentdom);
     if($time>=60) //requests per minute check
     {
-        $currentdom =$currentdom . "<br>" . $requests ."per/minute";
-        file_put_contents("debug.txt", $currentdom);
+
         $currenttime=time();
         $updateresult= $requests;
         $requests= 0;
