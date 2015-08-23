@@ -34,9 +34,7 @@ WeSecureApp Subdomain Scanner V 0 .1 Beta
                         beforeSend: function() {
                             $("#message").html("Request is proccessing...");
                         },
-                        success: function(data) {
-                          
-                        }
+                       
                        
                     });
                 });
