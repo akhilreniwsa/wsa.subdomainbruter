@@ -1,12 +1,12 @@
 <html>
 <head>
 <title>
-WeSecureApp Subdomain Scanner V 0 .1 
+WeSecureApp Subdomain Scanner V 0 .2
 </title>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 </head>
 <body>
-    <h1> WSA SUBDOMAINBRUTER V0.1</h1> <br/>
+    <h1> WSA SUBDOMAINBRUTER V0.2</h1> <br/>
     <h3><br/></h3>
     <h2>Features</h2><br/>
     <li>Multi threading- for fast results</li>
@@ -14,10 +14,14 @@ WeSecureApp Subdomain Scanner V 0 .1
     <li>Get a txt output file</li>
     <form id="send" action="scan.php" method="GET">
 <br/>Enter your Target Id in the form of <b>target.com</b> <br/>   <br/>
+        
         <input name="target" placeholder="example.com" value="">
     </form>
+    <input type="checkbox" id="checkbox" name="debug" value="Debug"> Enable/Disable for Debug Info<br>
+    Requests per minute/current domain check:<br/><div id="requests"></div><br/>
     <div id="message"></div><br/>
     Valid Domains:<br/><div id="response"></div><br/>
+    
 <?php
 //
 @set_time_limit(0);
@@ -57,6 +61,31 @@ WeSecureApp Subdomain Scanner V 0 .1
 
           
           }, 1000);
+          $('#checkbox').change(function()
+                                { setInterval(function()
+                      {
+  if($("#checkbox").prop('checked') == true)
+  {
+        $.ajax({
+            url: "debug.txt",
+            async: false,
+            success: function (data){
+                
+                $("#requests").html(data);
+            }
+        });
+    
+
+  }
+            if($("#checkbox").prop('checked') == false)
+            {
+                $("#requests").html("debug off");
+            }
+                                    
+                                        
+          }, 1000);
+                                });
+                                                        
         </script>
 </body>
 </html>
