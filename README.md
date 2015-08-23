@@ -1,11 +1,11 @@
 # wsa.subdomainbruter
-### Version: V0.2
+### Version: V0.2 Beta
 ###Features
 - CURL Multi Threading for faster request
 - Input File
 - Output File
 
-Version 0.2
+Version 0.2 Beta
 
 Added features:
 Debug Info
