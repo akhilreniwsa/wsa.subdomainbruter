@@ -1,11 +1,16 @@
 <?php
-
+@set_time_limit(0);
 include 'multithread.php';
 
-
-if (isset($_POST["target"]))
+if (isset($_GET["target"]))
 {
-$tar = $_POST["target"];
+ 
+ //reset debug file
+    file_put_contents("debug.txt", "");
+    
+$updateresult= 134; //default number of requests per minute
+$i=0;    
+$tar = $_GET["target"];
 
 $sub = explode("\n", file_get_contents('list.txt'));
 $count = count($sub);
@@ -17,28 +22,74 @@ function arraywalk(&$value,$key,$tar) {
 array_walk($sub,"arraywalk",$tar);
 
 
-
-for($i=0; $i<$count; $i++)
+$currenttime= time(); 
+$requests=0;
+    
+while($i<$count) 
 {
-
-$data = $sub;
-$r = multiRequest($data);
+   
  
-
-    if($r[$i]==0)
+    $mc = EpiCurl::getInstance();
+  $sub1[$i]= $mc->addURL($sub[$i]); 
+    if($i<$count-1) 
     {
-        
+    $sub2[$i]= $mc->addURL($sub[$i+1]);
+    }
+    if($i<$count-2) 
+    {
+    $sub3[$i]= $mc->addURL($sub[$i+2]);
+    }
+    if($sub1[$i]->code==0)
+    {
     }
     else
     {
-     
      $file = file_get_contents("valid.txt");
-     $file .= $sub[$i] . "/n";
+     $file .= $sub[$i] . "<br/>";
      file_put_contents("valid.txt", $file);
-     echo $file;
+     
     }
+    if($sub2[$i]->code==0)
+    {
+    }
+    else
+    {
+     $file = file_get_contents("valid.txt");
+     $file .= $sub[$i+1] . "<br/>";
+     file_put_contents("valid.txt", $file);
+    }
+    if($sub3[$i]->code==0)
+    {
+    }
+    else
+    {
+     $file = file_get_contents("valid.txt");
+     $file .= $sub[$i+2] . "<br/>";
+     file_put_contents("valid.txt", $file);
+    }
+   
 
+    $requests= $requests+3;
+
+$time= time()-$currenttime;
+    
+    $currentdom = $sub[$i];
+     $currentdom =$currentdom . "<br>" . $updateresult ."per/minute";
+    file_put_contents("debug.txt", $currentdom);
+    if($time>=60) //requests per minute check
+    {
+        $currentdom =$currentdom . "<br>" . $requests ."per/minute";
+        file_put_contents("debug.txt", $currentdom);
+        $currenttime=time();
+        $updateresult= $requests;
+        $requests= 0;
+        
+    }
+    $i=$i+3;
 }
+
+    
+
 }
  
 ?>
